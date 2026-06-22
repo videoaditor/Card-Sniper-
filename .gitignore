@@ -1,0 +1,6 @@
+sniper_config.json
+sniper_state.json
+sniper_sandbox.log
+__pycache__/
+*.pyc
+.pytest_cache/

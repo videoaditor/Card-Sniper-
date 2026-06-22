@@ -1,0 +1,44 @@
+{
+  "_instructions": "Copy this file to sniper_config.json and fill in your personal details. Do NOT share sniper_config.json with anyone.",
+
+  "--- YOUR PERSONAL SETTINGS ---": "",
+  "editor_label": "yournameb",
+  "slack_user_id": "UXXXXXXXXXX",
+
+  "--- YOUR TRELLO TOKEN ---": "",
+  "trello_api_key": "65440fd2bb89d722659e7aecfc7f5799",
+  "trello_token": "GET THIS FROM JELENA OR GENERATE YOUR OWN (see README)",
+
+  "--- SHARED SLACK BOT TOKEN ---": "",
+  "slack_token": "GET THIS FROM JELENA",
+
+  "--- YOUR PERSONAL FILTERS (optional, change whatever you want) ---": "",
+  "weekly_cap": 4,
+  "poll_interval_sec": 120,
+  "min_script_len": 50,
+
+  "health_blocklist_brands": [
+    "28Pilates", "305 Care", "Breakoutlab", "Cuppings",
+    "Doctor Vitals", "Dr Franks", "Forward Health GmbH", "Get A Drip",
+    "Golden Saffron", "Keller Gesundheitspflege GmbH", "Levide",
+    "METAFIT PHARMA SOLUTIONS LLC", "MYND Organics", "Naturida",
+    "NurseBabes", "PEAQ Skin", "Power / Sleep Bites", "Purevia Naturals",
+    "Reishi Therapy", "Shape Republic GmbH", "Shifaa Naturals",
+    "Soleya Scrubs", "Terra Health", "TerraTherapy", "Trimrx",
+    "Try Youth", "TryJello", "Veda Naturals", "Vital Growth UG",
+    "VitalVac", "Volumane"
+  ],
+
+  "excluded_board_names": [
+    "Aditor", "Aditor | Content Pipeline", "Aditor | Editoren",
+    "Aditor | Kappa Center", "Aditor Training", "Aditor Training | Backup",
+    "Demo Board", "My Trello board", "Kappa Board", "Tim Kunde Test Board",
+    "Testcompany", "testunternehmen", "Jelena Speed Test",
+    "Ognjen - Speed Test", "Brian Gonzalez", "Federico Crespi",
+    "Joel Sorenson", "Joey Bertschler", "Nicholas", "Norman Teo",
+    "Olivia Morasch", "Jonathan", "Swen", "Podcast Using Google VEO",
+    "EcomPro GmbH"
+  ],
+
+  "allowlist": []
+}
