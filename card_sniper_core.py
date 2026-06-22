@@ -226,12 +226,27 @@ def score_card(card: dict) -> float:
 # ── config / state I/O ────────────────────────────────────────────────────────
 
 def load_config(path: str) -> dict:
+    import os
     try:
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         data = {}
-    return {**CONFIG_DEFAULTS, **data}
+    config = {**CONFIG_DEFAULTS, **data}
+    env_map = {
+        "TRELLO_API_KEY": "trello_api_key",
+        "TRELLO_TOKEN": "trello_token",
+        "SLACK_TOKEN": "slack_token",
+        "SLACK_USER_ID": "slack_user_id",
+        "EDITOR_LABEL": "editor_label",
+        "EDITOR_KEY": "editor_key",
+        "WEEKLY_CAP": "weekly_cap",
+    }
+    for env_var, config_key in env_map.items():
+        val = os.environ.get(env_var)
+        if val:
+            config[config_key] = int(val) if config_key == "weekly_cap" else val
+    return config
 
 
 def load_state(path: str) -> dict:
