@@ -246,6 +246,13 @@ def load_config(path: str) -> dict:
         val = os.environ.get(env_var)
         if val:
             config[config_key] = int(val) if config_key == "weekly_cap" else val
+    for json_var, config_key in (("HEALTH_BLOCKLIST_JSON", "health_blocklist_brands"), ("EXCLUDED_BOARDS_JSON", "excluded_board_names")):
+        val = os.environ.get(json_var)
+        if val:
+            try:
+                config[config_key] = json.loads(val)
+            except json.JSONDecodeError:
+                pass
     return config
 
 
