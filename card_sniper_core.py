@@ -21,6 +21,7 @@ CONFIG_DEFAULTS = {
     "weekly_cap": 4,
     "poll_interval_sec": 120,
     "min_script_len": 50,
+    "max_card_age_hours": 24,
     "health_blocklist_brands": [],
     "excluded_board_names": [],
     "allowlist": [],
@@ -59,6 +60,19 @@ def board_is_eligible(board_name: str, config: dict) -> bool:
     return True
 
 
+def card_is_recent(card: dict, max_age_hours: int = 24) -> bool:
+    card_id = card.get("id", "")
+    if len(card_id) < 8:
+        return True
+    try:
+        created_ts = int(card_id[:8], 16)
+        created_at = datetime.fromtimestamp(created_ts, tz=timezone.utc)
+        age_hours = (datetime.now(timezone.utc) - created_at).total_seconds() / 3600
+        return age_hours <= max_age_hours
+    except Exception:
+        return True
+
+
 def is_likely_english(card: dict) -> bool:
     text = (card.get("name", "") + " " + (card.get("desc") or "")).lower()
     german_signals = ("ä", "ö", "ü", "ß", " für ", " und ", " mit ", " der ", " die ", " das ", " von ", " auf ", " ist ", " neue", " einen", " einem", " einer")
@@ -73,6 +87,8 @@ def is_eligible_card(card: dict, list_name: str, board_name: str, config: dict) 
     if not card_has_script(card, config.get("min_script_len", 50)):
         return False
     if not board_is_eligible(board_name, config):
+        return False
+    if not card_is_recent(card, config.get("max_card_age_hours", 24)):
         return False
     return True
 
