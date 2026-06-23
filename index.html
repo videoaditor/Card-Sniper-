@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card Sniper — Aditor</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0e0e0e; color: #f0f0f0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.6; }
+  a { color: #f0f0f0; }
+
+  .hero { padding: 100px 24px 80px; text-align: center; border-bottom: 1px solid #1e1e1e; }
+  .badge { display: inline-block; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 20px; padding: 4px 14px; font-size: 12px; color: #888; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(42px, 6vw, 72px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .hero h1 span { color: #e63946; }
+  .hero p { font-size: 18px; color: #888; max-width: 500px; margin: 0 auto 40px; }
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 12px 28px; border-radius: 8px; font-size: 15px; font-weight: 500; text-decoration: none; }
+  .btn-primary { background: #e63946; color: #fff; }
+  .btn-secondary { background: #1a1a1a; color: #f0f0f0; border: 1px solid #2a2a2a; }
+
+  section { padding: 80px 24px; border-bottom: 1px solid #1e1e1e; }
+  .container { max-width: 900px; margin: 0 auto; }
+  .section-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #e63946; margin-bottom: 12px; }
+  h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 16px; }
+  h2 span { color: #e63946; }
+  .sub { color: #888; font-size: 16px; max-width: 560px; margin-bottom: 48px; }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: #1e1e1e; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden; }
+  .step { background: #0e0e0e; padding: 28px 20px; }
+  .step-num { font-size: 11px; color: #444; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .step-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+  .step-desc { font-size: 13px; color: #666; line-height: 1.5; }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: #1e1e1e; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden; }
+  .feature { background: #0e0e0e; padding: 28px 24px; }
+  .feature-icon { font-size: 20px; margin-bottom: 14px; }
+  .feature-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  .feature-desc { font-size: 13px; color: #666; line-height: 1.5; }
+
+  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1px; background: #1e1e1e; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden; }
+  .option { background: #0e0e0e; padding: 36px 28px; }
+  .option-badge { display: inline-block; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 16px; }
+  .badge-laptop { background: #1e1e1e; color: #888; border: 1px solid #2a2a2a; }
+  .badge-cloud { background: #1a0a0b; color: #e63946; border: 1px solid #3a1015; }
+  .option h3 { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+  .option-sub { font-size: 13px; color: #555; margin-bottom: 24px; }
+  .steps-list { list-style: none; }
+  .steps-list li { display: flex; gap: 12px; margin-bottom: 14px; font-size: 14px; color: #aaa; line-height: 1.5; }
+  .steps-list li::before { content: attr(data-n); flex-shrink: 0; width: 20px; height: 20px; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #555; margin-top: 1px; }
+  .code { display: inline-block; background: #141414; border: 1px solid #222; border-radius: 4px; padding: 1px 6px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; color: #ccc; }
+  .code-block { background: #141414; border: 1px solid #222; border-radius: 8px; padding: 14px 16px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; color: #ccc; line-height: 1.7; margin: 12px 0; overflow-x: auto; }
+  .token { color: #888; font-size: 11px; word-break: break-all; }
+
+  .infra { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #1e1e1e; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden; }
+  .infra-item { background: #0e0e0e; padding: 24px; }
+  .infra-label { font-size: 11px; color: #444; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .infra-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  .infra-desc { font-size: 12px; color: #555; line-height: 1.5; }
+
+  footer { padding: 40px 24px; text-align: center; }
+  footer p { font-size: 13px; color: #444; }
+
+  @media (max-width: 600px) {
+    .options { grid-template-columns: 1fr; }
+    .infra { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">Aditor editors only</div>
+  <h1>Card Sniper<br><span>Always watching.</span></h1>
+  <p>Scans all Trello boards every 2 minutes. DMs you the moment a card is available. One tap to claim it.</p>
+  <div class="hero-buttons">
+    <a href="#setup" class="btn btn-primary">Set it up</a>
+    <a href="https://github.com/videoaditor/Card-Sniper-" class="btn btn-secondary" target="_blank">View on GitHub</a>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="section-label">How it works</div>
+    <h2>How you get<br>your next card.</h2>
+    <p class="sub">The sniper runs in the background and handles everything. You just tap Claim.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">Step 01</div>
+        <div class="step-title">Scan</div>
+        <div class="step-desc">Every 2 minutes, scans all client boards for new cards in Next Up.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 02</div>
+        <div class="step-title">Filter</div>
+        <div class="step-desc">Skips health brands, internal boards, and cards without a script.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 03</div>
+        <div class="step-title">Alert</div>
+        <div class="step-desc">Sends you a Slack DM with the card name, brand, and script preview.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 04</div>
+        <div class="step-title">Claim</div>
+        <div class="step-desc">One tap on the Claim button in Slack. Done.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 05</div>
+        <div class="step-title">Pause</div>
+        <div class="step-desc">Stops alerting while you're already working on a card.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Features</div>
+    <h2>Six things it<br><span>handles for you.</span></h2>
+    <p class="sub">Set it up once, forget it exists.</p>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Instant alerts</div>
+        <div class="feature-desc">New card in Next Up → Slack DM in under 2 minutes.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚫</div>
+        <div class="feature-title">Health brand filter</div>
+        <div class="feature-desc">Automatically skips 30+ health, wellness, and supplement brands.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔇</div>
+        <div class="feature-title">One at a time</div>
+        <div class="feature-desc">Suppresses all alerts while you already have a card in progress.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📋</div>
+        <div class="feature-title">Weekly cap</div>
+        <div class="feature-desc">Set your own max cards per week. Default is 4.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎛️</div>
+        <div class="feature-title">Your own filters</div>
+        <div class="feature-desc">Customize your blocklist, excluded boards, and script length minimum.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">☁️</div>
+        <div class="feature-title">Cloud option</div>
+        <div class="feature-desc">Deploy to Railway and it runs 24/7, even when your laptop is off.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="setup">
+  <div class="container">
+    <div class="section-label">Setup</div>
+    <h2>Two ways to<br><span>run it.</span></h2>
+    <p class="sub">Pick whichever suits you. Option 2 is better but takes a few extra steps.</p>
+    <div class="options">
+      <div class="option">
+        <span class="option-badge badge-laptop">Option 1 — Laptop</span>
+        <h3>Runs on your computer</h3>
+        <p class="option-sub">Works when your laptop is on. Starts automatically at login.</p>
+        <ol class="steps-list">
+          <li data-n="1">Install <strong>Python 3.12</strong> from the Microsoft Store</li>
+          <li data-n="2">Download this repo: <a href="https://github.com/videoaditor/Card-Sniper-" target="_blank">github.com/videoaditor/Card-Sniper-</a> → Code → Download ZIP → unzip</li>
+          <li data-n="3">Inside the folder, copy <span class="code">sniper_config.example.json</span> → rename to <span class="code">sniper_config.json</span> → open in Notepad and fill in:
+            <div class="code-block">
+              "editor_label": "yournameb"<br>
+              "slack_user_id": "your Slack member ID"<br>
+              "slack_token": "<span class="token">xoxb-4769942055110-11448408858656-99JUM03a4daDH5n0Ywyogdex</span>"<br>
+              "trello_token": "generate below"
+            </div>
+          </li>
+          <li data-n="4">Get your Slack member ID: click your name in Slack → ••• → Copy member ID</li>
+          <li data-n="5">Get your Trello token — open this link and click Allow:<br>
+            <div class="code-block token">https://trello.com/1/authorize?expiration=never&scope=read&response_type=token&name=CardSniper&key=65440fd2bb89d722659e7aecfc7f5799</div>
+          </li>
+          <li data-n="6">Open a terminal in the folder and run:
+            <div class="code-block">pip install pytest<br>python -m pytest test_card_sniper_core.py -q</div>
+            All 30 tests should pass.
+          </li>
+          <li data-n="7">Set up auto-start — paste this in PowerShell (update the path if you unzipped somewhere different):
+            <div class="code-block">$action = New-ScheduledTaskAction `<br>&nbsp;&nbsp;-Execute (Get-Command python).Source `<br>&nbsp;&nbsp;-Argument '"C:\Card Sniper\card_sniper.py" --loop' `<br>&nbsp;&nbsp;-WorkingDirectory "C:\Card Sniper"<br>$trigger = New-ScheduledTaskTrigger -AtLogOn -User $env:USERNAME<br>$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -RestartCount 5 -RestartInterval (New-TimeSpan -Minutes 2) -ExecutionTimeLimit (New-TimeSpan -Hours 0)<br>Register-ScheduledTask -TaskName "Card Sniper" -Action $action -Trigger $trigger -Settings $settings -RunLevel Limited -Force<br>Start-ScheduledTask -TaskName "Card Sniper"</div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="option">
+        <span class="option-badge badge-cloud">Option 2 — Cloud 24/7</span>
+        <h3>Runs even when laptop is off</h3>
+        <p class="option-sub">Hosted on Railway. Free tier is enough. Never misses a card.</p>
+        <ol class="steps-list">
+          <li data-n="1">Complete Option 1 steps 1–6 first (install, config, test)</li>
+          <li data-n="2">Create a free account at <a href="https://railway.app" target="_blank">railway.app</a></li>
+          <li data-n="3">New project → GitHub Repository → <span class="code">videoaditor/Card-Sniper-</span> → Deploy Now</li>
+          <li data-n="4">Click the worker → Variables → Raw Editor and paste:
+            <div class="code-block">
+              TRELLO_API_KEY=65440fd2bb89d722659e7aecfc7f5799<br>
+              TRELLO_TOKEN=<span class="token">your trello token</span><br>
+              SLACK_TOKEN=<span class="token">xoxb-4769942055110-11448408858656-99JUM03a4daDH5n0Ywyogdex</span><br>
+              SLACK_USER_ID=<span class="token">your slack member ID</span><br>
+              EDITOR_LABEL=<span class="token">yournameb</span><br>
+              EDITOR_KEY=<span class="token">yourname</span><br>
+              WEEKLY_CAP=4
+            </div>
+          </li>
+          <li data-n="5">Click Update Variables → Deploy. Done — it runs 24/7.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Infrastructure</div>
+    <h2>What runs<br>under the hood.</h2>
+    <div class="infra">
+      <div class="infra-item">
+        <div class="infra-label">Data source</div>
+        <div class="infra-title">Trello</div>
+        <div class="infra-desc">All board and card data comes from Trello's REST API. No database needed.</div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-label">Alerts</div>
+        <div class="infra-title">Slack</div>
+        <div class="infra-desc">DMs sent via the Card Sniper bot using your personal Slack user ID.</div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-label">Runtime</div>
+        <div class="infra-title">Python 3.12</div>
+        <div class="infra-desc">Pure stdlib — no external dependencies except pytest for tests.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by Jelena for the Aditor editing team · <a href="https://github.com/videoaditor/Card-Sniper-" target="_blank">GitHub</a></p>
+</footer>
+
+</body>
+</html>
