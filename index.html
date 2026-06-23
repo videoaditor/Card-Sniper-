@@ -101,7 +101,7 @@
       <div class="how-step">
         <div class="how-num">Automatically</div>
         <div class="how-title">Filters</div>
-        <div class="how-desc">Skips health brands, internal boards, and cards with no script.</div>
+        <div class="how-desc">Skips the brands you don't want — and only pings you for the ones you do.</div>
       </div>
       <div class="how-step">
         <div class="how-num">Instantly</div>
@@ -139,9 +139,9 @@
         <div class="feature-desc">Won't alert you while you're already working on a card.</div>
       </div>
       <div class="feature">
-        <div class="feature-icon">🎛️</div>
-        <div class="feature-title">Your own settings</div>
-        <div class="feature-desc">Set your own brand blocklist, weekly cap, and excluded boards.</div>
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Your brands, your alerts</div>
+        <div class="feature-desc">Watch only the clients you love. Block the ones you don't. Set it once, forget it.</div>
       </div>
       <div class="feature">
         <div class="feature-icon">☁️</div>
@@ -153,6 +153,56 @@
         <div class="feature-title">Free to run</div>
         <div class="feature-desc">No subscriptions. Python is free, Railway's free tier is enough.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="label">Your preferences</div>
+    <h2>Be first in line for the brands you actually want.</h2>
+    <p class="sub">Instead of checking Trello constantly and hoping the right card shows up, you tell the sniper exactly what you're interested in — and it does the watching for you.</p>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">❤️</div>
+        <div class="feature-title">Watch only what you love</div>
+        <div class="feature-desc">Add an allowlist of your favourite clients — fashion, tech, food, gaming, whatever. The sniper ignores everything else and alerts you the instant one of YOUR boards has a new card ready.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚫</div>
+        <div class="feature-title">Block what you don't want</div>
+        <div class="feature-desc">Don't want health supplements, wellness brands, or a specific client? Add any keyword to your blocklist. You'll never hear about them again — even if a dozen cards drop at once.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📅</div>
+        <div class="feature-title">Control your workload</div>
+        <div class="feature-desc">Set a weekly cap so you never get overwhelmed. Hit your limit and alerts pause for the rest of the week. Raise or lower it any time.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:28px; background:#111; border:1px solid #1e1e1e; border-radius:12px; padding:24px;">
+      <div style="font-size:11px; color:#444; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px;">Two common setups</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:20px;">
+        <div>
+          <div style="font-size:13px; color:#888; margin-bottom:8px;">You only want fashion and food brands:</div>
+          <div class="code-block">"allowlist": [
+  "Nike Board",
+  "Zara Q3",
+  "HelloFresh"
+]</div>
+          <div style="font-size:12px; color:#444; margin-top:6px;">Leave everything outside this list — the sniper won't even look at it.</div>
+        </div>
+        <div>
+          <div style="font-size:13px; color:#888; margin-bottom:8px;">You want everything except health brands:</div>
+          <div class="code-block">"health_blocklist_brands": [
+  "Herbalife",
+  "PEAQ",
+  "supplement"
+]</div>
+          <div style="font-size:12px; color:#444; margin-top:6px;">Any board whose name contains these words gets skipped automatically.</div>
+        </div>
+      </div>
+      <div style="font-size:12px; color:#333; margin-top:20px; padding-top:16px; border-top:1px solid #1e1e1e;">You set these in your <span class="code">sniper_config.json</span> file (Option 1) or as environment variables in Railway (Option 2). Each editor has their own — your filters don't affect anyone else's.</div>
     </div>
   </div>
 </section>
@@ -336,8 +386,8 @@ WEEKLY_CAP=4</div>
         <div class="faq-a">No. The sniper only alerts you once per card and won't send anything while you already have a card in progress. You also have a weekly cap (default: 4 cards) which you can adjust in your config file.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">What if I want to block certain brands?</div>
-        <div class="faq-a">Open your <span class="code">sniper_config.json</span> file and add brands to the <span class="code">health_blocklist_brands</span> list. The sniper already blocks 30+ health and wellness brands by default.</div>
+        <div class="faq-q">Can I make it only alert me for the brands I actually want?</div>
+        <div class="faq-a">Yes — two ways. To watch <em>only</em> specific brands, add their board names to <span class="code">allowlist</span> in your config. To block specific brands you don't want, add keywords to <span class="code">health_blocklist_brands</span> — it's a partial match, so "supplement" blocks any board with that word in the name. Both filters are yours alone and don't affect other editors.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">How do I stop it?</div>
