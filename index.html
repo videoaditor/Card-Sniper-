@@ -383,7 +383,19 @@ WEEKLY_CAP=4</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Will I get spammed with messages?</div>
-        <div class="faq-a">No. The sniper only alerts you once per card and won't send anything while you already have a card in progress. You also have a weekly cap (default: 4 cards) which you can adjust in your config file.</div>
+        <div class="faq-a">No — there are three layers of protection. First, each card can only alert you once. Second, while you already have a card in progress the sniper stays quiet. Third, once you hit your weekly cap, alerts pause for the rest of the week. You stay in control of the volume.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Will I ever get alerted about the same card twice?</div>
+        <div class="faq-a">No. Each card alerts exactly once. On top of that, the sniper now skips any card that was created more than 24 hours ago — so even if the app restarts, old open cards that you've already seen won't pop up again. Only cards that appeared in the last 24 hours will ever ping you.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I change my weekly cap?</div>
+        <div class="faq-a">The default is 4 cards per week. To change it:<br><br>
+          <strong>Option 1 (laptop):</strong> open your <span class="code">sniper_config.json</span> file in Notepad, find <span class="code">"weekly_cap"</span> and change the number. Save the file and restart the sniper.<br><br>
+          <strong>Option 2 (Railway):</strong> go to your Railway project → worker → Variables tab → find <span class="code">WEEKLY_CAP</span> and change the number → click Update Variables. It redeploys automatically.<br><br>
+          Once you hit the cap, alerts pause until the following Monday morning. Raise it if you want more cards, lower it if you're already busy.
+        </div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Can I make it only alert me for the brands I actually want?</div>
